@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:house_point_hourglasses/data/models/house_points.dart';
 import 'package:house_point_hourglasses/presentation/widgets/house_point_scale.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,18 +34,34 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               child: Row(
-                children: const [
+                children: [
                   HousePointsScale(
-                    houseColor: Colors.green,
+                    housePoints: HousePoints(
+                        houseColor: Colors.green,
+                        id: 0,
+                        name: 'Гриффиндор',
+                        points: 0),
                   ),
                   HousePointsScale(
-                    houseColor: Colors.blue,
+                    housePoints: HousePoints(
+                        houseColor: Colors.blue,
+                        id: 1,
+                        name: 'Гриффиндор',
+                        points: 0),
                   ),
                   HousePointsScale(
-                    houseColor: Colors.red,
+                    housePoints: HousePoints(
+                        houseColor: Colors.red,
+                        id: 2,
+                        name: 'Гриффиндор',
+                        points: 0),
                   ),
                   HousePointsScale(
-                    houseColor: Colors.yellowAccent,
+                    housePoints: HousePoints(
+                        houseColor: Colors.orange,
+                        id: 3,
+                        name: 'Гриффиндор',
+                        points: 0),
                   ),
                 ],
               ),

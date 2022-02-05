@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:house_point_hourglasses/data/models/house_points.dart';
 
 class HousePointsScale extends StatefulWidget {
-  final Color houseColor;
+  final HousePoints housePoints;
 
   const HousePointsScale({
     Key? key,
-    required this.houseColor,
+    required this.housePoints,
   }) : super(key: key);
 
   @override
@@ -31,7 +32,7 @@ class _HousePointsScaleState extends State<HousePointsScale> {
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: widget.houseColor,
+                    color: widget.housePoints.houseColor,
                     border: const Border(
                       top: BorderSide(color: Colors.yellow, width: 6),
                       left: BorderSide(color: Colors.yellow, width: 6),
@@ -44,7 +45,7 @@ class _HousePointsScaleState extends State<HousePointsScale> {
             Flexible(
               child: CustomPaint(
                 size: Size.infinite,
-                painter: MiddlePart(widget.houseColor),
+                painter: MiddlePart(widget.housePoints.houseColor),
               ),
             ),
             Flexible(
@@ -57,9 +58,9 @@ class _HousePointsScaleState extends State<HousePointsScale> {
                 child: Container(
                   alignment: Alignment.bottomCenter,
                   child: FractionallySizedBox(
-                    heightFactor: points,
+                    heightFactor: widget.housePoints.points,
                     child: Container(
-                      color: widget.houseColor,
+                      color: widget.housePoints.houseColor,
                     ),
                   ),
                   decoration: const BoxDecoration(
@@ -85,10 +86,9 @@ class _HousePointsScaleState extends State<HousePointsScale> {
       ),
     );
   }
-}
 
-displayDialog(BuildContext context) async {
-  await showDialog(
+  displayDialog(BuildContext context) async {
+    await showDialog(
       context: context,
       builder: (BuildContext context) {
         return Expanded(
@@ -99,17 +99,31 @@ displayDialog(BuildContext context) async {
             actionsAlignment: MainAxisAlignment.spaceEvenly,
             actions: [
               FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(
+                    () {
+                      widget.housePoints.points -= 0.1;
+                    },
+                  );
+                },
                 child: const Icon(Icons.remove),
               ),
               FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(
+                    () {
+                      widget.housePoints.points += 0.1;
+                    },
+                  );
+                },
                 child: const Icon(Icons.add),
               ),
             ],
           ),
         );
-      });
+      },
+    );
+  }
 }
 
 class MiddlePart extends CustomPainter {
