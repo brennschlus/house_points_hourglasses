@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:house_point_hourglasses/data/models/house_points.dart';
+import 'package:house_point_hourglasses/models/house_points.dart';
 
 class HousePointsScale extends StatefulWidget {
   final HousePoints housePoints;
-
   const HousePointsScale({
     Key? key,
     required this.housePoints,
@@ -14,8 +13,6 @@ class HousePointsScale extends StatefulWidget {
 }
 
 class _HousePointsScaleState extends State<HousePointsScale> {
-  double points = 0;
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -32,7 +29,7 @@ class _HousePointsScaleState extends State<HousePointsScale> {
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: widget.housePoints.houseColor,
+                    color: Color(int.parse(widget.housePoints.houseColor)),
                     border: const Border(
                       top: BorderSide(color: Colors.yellow, width: 6),
                       left: BorderSide(color: Colors.yellow, width: 6),
@@ -45,7 +42,8 @@ class _HousePointsScaleState extends State<HousePointsScale> {
             Flexible(
               child: CustomPaint(
                 size: Size.infinite,
-                painter: MiddlePart(widget.housePoints.houseColor),
+                painter:
+                    MiddlePart(Color(int.parse(widget.housePoints.houseColor))),
               ),
             ),
             Flexible(
@@ -60,7 +58,7 @@ class _HousePointsScaleState extends State<HousePointsScale> {
                   child: FractionallySizedBox(
                     heightFactor: widget.housePoints.points,
                     child: Container(
-                      color: widget.housePoints.houseColor,
+                      color: Color(int.parse(widget.housePoints.houseColor)),
                     ),
                   ),
                   decoration: const BoxDecoration(
@@ -91,35 +89,36 @@ class _HousePointsScaleState extends State<HousePointsScale> {
     await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return Expanded(
-          child: AlertDialog(
-            title: const Text('Прибавить или отнять очки?'),
-            elevation: 10,
-            backgroundColor: Colors.green,
-            actionsAlignment: MainAxisAlignment.spaceEvenly,
-            actions: [
-              FloatingActionButton(
-                onPressed: () {
-                  setState(
-                    () {
-                      widget.housePoints.points -= 0.1;
-                    },
-                  );
-                },
-                child: const Icon(Icons.remove),
-              ),
-              FloatingActionButton(
-                onPressed: () {
-                  setState(
-                    () {
-                      widget.housePoints.points += 0.1;
-                    },
-                  );
-                },
-                child: const Icon(Icons.add),
-              ),
-            ],
-          ),
+        return AlertDialog(
+          actionsPadding: const EdgeInsets.all(8),
+          title: const Text('Прибавить или отнять очки?'),
+          elevation: 10,
+          backgroundColor: Colors.green,
+          actionsAlignment: MainAxisAlignment.spaceEvenly,
+          actions: [
+            FloatingActionButton(
+              onPressed: () {
+                setState(
+                  () {
+                    widget.housePoints.points =
+                        widget.housePoints.points! - 0.1;
+                  },
+                );
+              },
+              child: const Icon(Icons.remove),
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                setState(
+                  () {
+                    widget.housePoints.points =
+                        widget.housePoints.points! + 0.1;
+                  },
+                );
+              },
+              child: const Icon(Icons.add),
+            ),
+          ],
         );
       },
     );
