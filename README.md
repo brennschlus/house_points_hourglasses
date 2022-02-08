@@ -1,6 +1,7 @@
-# house_point_hourglasses
+# Факультетские часы Хогвартса
 
-A new Flutter project.
+
+![grab-landing-page](https://github.com/brennschlus/house_points_hourglasses/blob/development/showcase/screencast.gif)
 
 ## Getting Started
 
